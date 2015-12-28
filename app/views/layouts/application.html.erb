@@ -13,7 +13,17 @@
 <% if alert %>
   <p class="alert"><%= alert %></p>
 <% end %>
-<%= yield %>
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-xs-3">
+      <h3>Your Todo List</h3>
+    </div>
+    <div class="col-xs-9">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
   <p>
     <% if user_signed_in? %>
       Logged in as <strong><%= current_user.email %></strong>.
