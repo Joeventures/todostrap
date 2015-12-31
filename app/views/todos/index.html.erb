@@ -1,30 +1,29 @@
 <!-- <p id="notice"><%= notice %></p> -->
+<div class="table-responsive">
+<h1>Your Todos</h1>
 
-<h1>Listing Todos</h1>
-
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
+      <th>Do This</th>
       <th>Notes</th>
       <th>Complete</th>
-      <th colspan="2"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @todos.each do |todo| %>
       <tr>
-        <td><%= todo.title %></td>
+        <td><%= link_to todo.title, edit_todo_path(todo) %></td>
         <td><%= todo.notes %></td>
         <td><%= todo.complete %></td>
-        <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
         <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
 <%= link_to 'New Todo', new_todo_path %>
