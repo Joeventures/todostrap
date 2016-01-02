@@ -7,33 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if notice %>
-  <p class="notice"><%= notice %></p>
-<% end %>
-
-<% if alert %>
-  <p class="alert"><%= alert %></p>
-<% end %>
 <div id="main-container" class="container">
   <div class="row">
     <div class="col-xs-3">
       <h3>Your Todo List</h3>
+      <% if notice %>
+        <p class="alert alert-warning" role="alert"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger" role="alert"><%= alert %></p>
+      <% end %>
+      <p class="well">
+        <% if user_signed_in? %>
+          Logged in as <strong><%= current_user.email %></strong>.<br>
+          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'profile-link' %> |
+          <%= link_to "Logout", destroy_user_session_path, method: :get, :class => 'profile-link'  %>
+        <% else %>
+          <%= link_to "Sign up", new_user_registration_path, :class => 'profile-link'  %> |
+          <%= link_to "Login", new_user_session_path, :class => 'profile-link'  %>
+        <% end %>
+      </p>
     </div>
     <div class="col-xs-9">
       <%= yield %>
     </div>
   </div>
-</div>
+  <div class="row">
 
-  <p>
-    <% if user_signed_in? %>
-      Logged in as <strong><%= current_user.email %></strong>.
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'profile-link' %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'profile-link'  %>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path, :class => 'profile-link'  %> |
-      <%= link_to "Login", new_user_session_path, :class => 'profile-link'  %>
-    <% end %>
-  </p>
+  </div>
+</div>
 </body>
 </html>

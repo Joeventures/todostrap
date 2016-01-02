@@ -7,8 +7,6 @@
     <tr>
       <th>Do This</th>
       <th>Notes</th>
-      <th>Complete</th>
-      <th></th>
     </tr>
   </thead>
 
@@ -17,9 +15,9 @@
       <tr>
         <td>
           <% if todo.complete %>
-          <%= content_tag :del, todo.title %>
-          <% else %>
-          <%= link_to todo.title, edit_todo_path(todo) %>
+            <%= content_tag :del, todo.title %>
+            <% else %>
+            <%= link_to todo.title, edit_todo_path(todo) %>
           <% end %>
         </td>
         <td><%= todo.notes %></td>
@@ -32,6 +30,5 @@
   </tbody>
 </table>
 </div>
-<br>
 
-<%= link_to 'New Todo', new_todo_path %>
+<%= link_to 'New Todo', new_todo_path, role: :button, class: ["btn", "btn-default", "btn-xs"] %>
