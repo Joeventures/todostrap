@@ -61,6 +61,16 @@ class TodosController < ApplicationController
     end
   end
 
+  # PUT /todos/1/complete
+  def complete
+    @todo = Todo.find(params[:todo_id])
+    @todo.update(complete: true)
+    respond_to do |format|
+      format.html { redirect_to todos_url, notice: 'Todo is completed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
@@ -69,6 +79,6 @@ class TodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      params.require(:todo).permit(:user_id, :title, :notes)
+      params.require(:todo).permit(:user_id, :title, :notes, :complete)
     end
 end

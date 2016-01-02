@@ -14,11 +14,13 @@
 
   <tbody>
     <% @todos.each do |todo| %>
-      <tr>
+      <tr<% if todo.complete %> style="text-decoration: line-through"<% end %>>
         <td><%= link_to todo.title, edit_todo_path(todo) %></td>
         <td><%= todo.notes %></td>
-        <td><%= todo.complete %></td>
-        <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% unless todo.complete %>
+            <%= link_to 'Mark Complete', todo_complete_path(todo.id), method: :put, role: :button, class: 'btn btn-default btn-xs' %>
+          <% end %></td>
+        <td><%= link_to 'Delete', todo, method: :delete, data: { confirm: 'Are you sure?' }, role: :button, class: 'btn btn-default btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>
